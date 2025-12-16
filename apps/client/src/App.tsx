@@ -1,9 +1,7 @@
-import { ComponentShowcase } from "@/components/ComponentShowcase"
+import { ComponentShowcase } from '@/components/ComponentShowcase';
 
 function App() {
-  return (
-    <ComponentShowcase />
-  )
+  return <ComponentShowcase />;
 }
 
-export default App
+export default App;

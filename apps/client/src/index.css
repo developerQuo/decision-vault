@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @theme {
   /* Semantic Colors */
@@ -30,12 +30,12 @@
   --color-card-foreground: hsl(var(--card-foreground));
 
   /* Brand Colors */
-  --color-truth-blue: #1F3A5F;
-  --color-context-slate: #2E3440;
-  
-  --color-decision-amber: #F2B705;
-  --color-decision-green: #3FA796;
-  --color-decision-red: #C85C5C;
+  --color-truth-blue: #1f3a5f;
+  --color-context-slate: #2e3440;
+
+  --color-decision-amber: #f2b705;
+  --color-decision-green: #3fa796;
+  --color-decision-red: #c85c5c;
 
   /* Decision States using Brand Colors */
   --color-state-proposed: #cbd5e1;
