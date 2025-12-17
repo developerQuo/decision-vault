@@ -1,4 +1,5 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
+import { useNavigate } from 'react-router-dom';
 
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
@@ -75,6 +76,8 @@ export function NoticeListing() {
     isFetchingNextPage,
   });
 
+  const navigate = useNavigate();
+
   if (status === 'pending') {
     return (
       <div className="text-muted-foreground p-8 text-center">
@@ -128,6 +131,7 @@ export function NoticeListing() {
                 <TableRow
                   key={notice.id}
                   className="hover:bg-muted/30 h-20 cursor-pointer text-base"
+                  onClick={() => navigate(`/notice-board/${notice.id}`)}
                 >
                   <TableCell className="py-4">
                     <Badge

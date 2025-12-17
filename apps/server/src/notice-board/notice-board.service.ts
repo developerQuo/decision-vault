@@ -1,4 +1,4 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import * as admin from 'firebase-admin';
 
 export interface CreateNoticeDto {
@@ -58,5 +58,20 @@ export class NoticeBoardService {
         createdAt: data.createdAt.toDate().toISOString(), // Return ISO string
       };
     });
+  }
+
+  async findOne(id: string) {
+    const doc = await this.db.collection('notice-board').doc(id).get();
+
+    if (!doc.exists) {
+      throw new NotFoundException(`Notice with ID "${id}" not found`);
+    }
+
+    const data = doc.data();
+    return {
+      id: doc.id,
+      ...data,
+      createdAt: data?.createdAt?.toDate().toISOString() ?? null,
+    };
   }
 }

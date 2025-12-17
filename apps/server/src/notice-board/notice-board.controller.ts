@@ -1,4 +1,11 @@
-import { Body, Controller, Get, Post, Query } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  Post,
+  Query,
+} from '@nestjs/common';
 
 import type { CreateNoticeDto } from './notice-board.service';
 import { NoticeBoardService } from './notice-board.service';
@@ -23,5 +30,10 @@ export class NoticeBoardController {
   @Post()
   create(@Body() createNoticeDto: CreateNoticeDto) {
     return this.noticeBoardService.create(createNoticeDto);
+  }
+
+  @Get(':id')
+  findOne(@Param('id') id: string) {
+    return this.noticeBoardService.findOne(id);
   }
 }
