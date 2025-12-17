@@ -1,5 +1,6 @@
 import { useActionState } from 'react';
 
+import DiscordLoginButton from '@/components/DiscordLoginButton';
 import { Button } from '@/components/ui/button';
 import {
   Card,
@@ -8,6 +9,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
+import { useAuth } from '@/hooks/useAuth';
 
 // Define the shape of our form state
 interface CreateNoticeState {
@@ -46,6 +48,7 @@ async function createNoticeAction(
       headers: {
         'Content-Type': 'application/json',
       },
+      credentials: 'include',
       body: JSON.stringify({ title, content }),
     });
 
@@ -74,6 +77,35 @@ export default function CreateNoticePage() {
     createNoticeAction,
     initialState,
   );
+  const { isAuthenticated, isLoading } = useAuth();
+
+  if (isLoading) {
+    return (
+      <div className="container mx-auto max-w-2xl px-4 py-10">
+        <div className="text-center">Loading...</div>
+      </div>
+    );
+  }
+
+  if (!isAuthenticated) {
+    return (
+      <div className="container mx-auto max-w-2xl px-4 py-10">
+        <Card className="w-full">
+          <CardHeader>
+            <CardTitle className="text-2xl font-bold">
+              Login Required
+            </CardTitle>
+            <CardDescription>
+              You must be logged in to create a notice.
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="flex justify-center">
+            <DiscordLoginButton />
+          </CardContent>
+        </Card>
+      </div>
+    );
+  }
 
   return (
     <div className="container mx-auto max-w-2xl px-4 py-10">

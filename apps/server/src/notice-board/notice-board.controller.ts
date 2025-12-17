@@ -5,8 +5,10 @@ import {
   Param,
   Post,
   Query,
+  UseGuards,
 } from '@nestjs/common';
 
+import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import type { CreateNoticeDto } from './notice-board.service';
 import { NoticeBoardService } from './notice-board.service';
 
@@ -28,6 +30,7 @@ export class NoticeBoardController {
   }
 
   @Post()
+  @UseGuards(JwtAuthGuard)
   create(@Body() createNoticeDto: CreateNoticeDto) {
     return this.noticeBoardService.create(createNoticeDto);
   }
