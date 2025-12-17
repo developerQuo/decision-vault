@@ -6,7 +6,7 @@
     "packages/*"
   ],
   "scripts": {
-    "dev:client": "npm run dev --workspace=@proto/client",
+    "dev:client": "npm run dev --workspace=@proto/client -- --host=0.0.0.0",
     "dev:server": "npm run start:dev --workspace=@proto/server"
   },
   "devDependencies": {
